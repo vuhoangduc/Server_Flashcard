@@ -4,6 +4,7 @@ const app = express()
 const morgan = require('morgan')
 const {default:helmet} = require('helmet')
 const compression = require('compression')
+const createError = require('http-errors')
 require('dotenv').config()
 // init midleware
 app.use(morgan("dev"));
@@ -15,15 +16,15 @@ app.use(
 )
 app.use(compression(),
 express.json());
+// init dbP
+require('./db/init.mongoodb');
 // init routes
-app.use((req,res,next)=>{
-    res.json('Hello!')
-})
+app.use('',require('./routes/index'));
 // handling error
 app.use((req,res,next)=>{
-    const error = new Error('Not Found')
-    error.status = 404
-    next(error)
+    // const error = new Error('Not Found')
+    // error.status = 404
+    next(createError.NotFound('This route does not exist'))
 })
 
 app.use((error,req,res,next)=>{

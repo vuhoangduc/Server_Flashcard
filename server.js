@@ -3,5 +3,5 @@ const PORT = process.env.PORT || 3055;
 
 
 const server = app.listen(PORT,()=>{
-    console.log(`WSV eComerece start with ${PORT}`)
+    console.log(`WSV server start with ${PORT}`)
 })
