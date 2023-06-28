@@ -9,22 +9,22 @@ require('dotenv').config()
 // init midleware
 app.use(morgan("dev"));
 app.use(helmet())
+app.use(compression(),
+express.json());
 app.use(
     express.urlencoded({
         extended:true
     })
 )
-app.use(compression(),
-express.json());
 // init dbP
 require('./db/init.mongoodb');
 // init routes
-app.use('',require('./routes/index'));
+app.use('/',require('./routes/index'));
 // handling error
 app.use((req,res,next)=>{
     // const error = new Error('Not Found')
     // error.status = 404
-    next(createError.NotFound('This route does not exist'))
+    next(createError.NotFound('This router does not exist'))
 })
 
 app.use((error,req,res,next)=>{

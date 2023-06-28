@@ -26,7 +26,7 @@ var albumSchema = new mongoose.Schema({
     collection:COLLECTION_NAME
 })
 albumSchema.pre('save',function(next){
-    this.product_slug = slugify(this.product_name, {lower:true})
+    this.album_slug = slugify(this.album_name, {lower:true})
     next()
 })
 module.exports = mongoose.model(DOCUMENT_NAME,albumSchema)
